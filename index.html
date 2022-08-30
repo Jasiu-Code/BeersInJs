@@ -12,10 +12,71 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="main.css" />
-    <style></style>
+    <style>
+      .beerContainer {
+        width: 300px;
+        height: 300px;
+        border: 5px solid red;
+        border-radius: 2rem;
+        background: rgba(255, 235, 205, 0.7);
+
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .beerContainer:hover {
+        scale: 1.05;
+        transition: ease-out 0.2s;
+      }
+      .beers {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+      }
+      .beerContainer p {
+        font-size: 12px;
+      }
+      img {
+        max-height: 150px;
+      }
+      h1 {
+        text-align: center;
+      }
+      p {
+        overflow: scroll;
+      }
+    </style>
   </head>
   <body>
-    <script></script>
+    <h1>List of beers:</h1>
+    <div class="beers" id="beers"></div>
+    <script>
+      const beers = document.getElementById("beers");
+
+      const data = fetch("https://api.punkapi.com/v2/beers")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data[0]);
+          data.map((beer) => {
+            const container = document.createElement("div");
+            container.classList.add("beerContainer");
+            const title = document.createElement("h3");
+            const image = document.createElement("img");
+            const description = document.createElement("p");
+            title.innerText = beer.name;
+            image.src = beer.image_url;
+            description.innerText = beer.description;
+            container.appendChild(title);
+            container.appendChild(image);
+            container.appendChild(description);
+            beers.append(container);
+          });
+        });
+    </script>
     <script src="app.js"></script>
   </body>
 </html>
