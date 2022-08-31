@@ -1,4 +1,3 @@
-///for grab all divs add evenet listener // wywyowalnie tej funcki po fetchu
 if (document.readyState == "loading") {
   document.addEventListener("DOMContentLoaded", ready);
 } else {
@@ -7,7 +6,6 @@ if (document.readyState == "loading") {
 
 function ready() {
   const beers = document.getElementById("beers");
-  const favBeers = document.getElementById("favBeers");
   const favBeer = document.getElementsByClassName("fav");
   function addFav() {
     this.classList.contains("fav")

@@ -12,17 +12,60 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="main.css" />
-    <style></style>
+    <style>
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+      .randomBeer {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        background: red;
+      }
+      .favBeers {
+        grid-column: 1/2;
+        grid-row: 2/3;
+        background: blue;
+      }
+      .allBeers {
+        grid-column: 2/4;
+        grid-row: 1/3;
+        background-color: bisque;
+        /* display: flex; */
+      }
+      .beers {
+        height: 90vh;
+        overflow: scroll;
+      }
+    </style>
   </head>
   <body>
     <div class="header">
       <h1>BeersInJS</h1>
       <input type="text" placeholder="Find your favourite beer..." />
     </div>
-    <h1>Your favourite beer:</h1>
-    <div class="favBeers" id="favBeers"></div>
-    <h2>List of all beers:</h2>
-    <div class="beers" id="beers"></div>
+    <main>
+      <div class="layout">
+        <div class="randomBeer">
+          <h2>Did you try this?:</h2>
+        </div>
+        <div class="favBeers" id="favBeers">
+          <h2>Your favourite beers:</h2>
+          <ul>
+            <li>Beer 1</li>
+            <li>Beer 1</li>
+            <li>Beer 1</li>
+          </ul>
+        </div>
+
+        <div class="allBeers">
+          <h2>List of all beers:</h2>
+          <div class="beers" id="beers"></div>
+        </div>
+      </div>
+    </main>
+
     <script src="app.js"></script>
   </body>
 </html>

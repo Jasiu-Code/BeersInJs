@@ -9,7 +9,7 @@ html,
 
 body {
   font-family: "Rubik", sans-serif;
-  background-color: #ffe53b;
+  background-color: black;
   background-image: linear-gradient(90deg, #ffe53b 0%, #ff6625 74%);
 }
 .header {
