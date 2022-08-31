@@ -7,11 +7,21 @@ if (document.readyState == "loading") {
 
 function ready() {
   const beers = document.getElementById("beers");
+  const favBeers = document.getElementById("favBeers");
+  const favBeer = document.getElementsByClassName("fav");
   function addFav() {
     this.classList.contains("fav")
       ? this.classList.remove("fav")
       : this.classList.add("fav");
+    displayFav();
   }
+
+  function displayFav() {
+    favBeer.forEach(() => {
+      console.log("test");
+    });
+  }
+
   fetch("https://api.punkapi.com/v2/beers")
     .then((res) => res.json())
     .then((data) => {
