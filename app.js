@@ -8,12 +8,23 @@ function ready() {
   const beersContainer = document.getElementById("beersContainer");
   const favBeers = document.getElementById("favBeer");
   const fav = favBeers.getElementsByClassName("fav");
+  const searchInput = document.querySelector("[data-search]");
+  let beersArray = [];
+
+  searchInput.addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    const filteredBeers = beersArray.filter((beer) => {
+      return beer.name.toLowerCase().includes(value);
+    });
+    console.log(filteredBeers);
+    displayAllBeers(filteredBeers);
+  });
 
   function displayRandomBeer(data) {
     data
       .map((beer) => {
         randomBeer.innerHTML += `
-        <div class='beerContainer'>
+        <div class='randomBeerContainer'>
             <h3 class='name'>${beer.name}</h3>
             <img src='${beer.image_url}'></img>
             <p>${beer.description}</p>
@@ -24,21 +35,22 @@ function ready() {
   }
 
   function displayAllBeers(data) {
-    data
+    const htmlString = data
       .map((beer) => {
-        beersContainer.innerHTML += `
+        return `
         <div class='beerContainer'>
             <h3 class='name'>${beer.name}</h3>
             <img src='${beer.image_url}'></img>
             <p>${beer.description}</p>
-            <button class="add">Add to Favourite</button>
+            <button class="addFavBtn">Favourite</button>
             </div>
             `;
       })
       .join("");
+    beersContainer.innerHTML = htmlString;
   }
   beersContainer.addEventListener("click", function (e) {
-    const tgt = e.target.closest(".add");
+    const tgt = e.target.closest(".addFavBtn");
     if (tgt)
       addToFav(
         tgt.closest(".beerContainer").querySelector(".name").textContent
@@ -74,9 +86,11 @@ function ready() {
     }
   }
   async function getAllBeers() {
-    const response = await fetch("https://api.punkapi.com/v2/beers");
-    const data = await response.json();
-    displayAllBeers(data);
+    const response = await fetch(
+      "https://api.punkapi.com/v2/beers?page=2&per_page=80"
+    );
+    beersArray = await response.json();
+    displayAllBeers(beersArray);
   }
   async function getRandomBeer() {
     const response = await fetch("https://api.punkapi.com/v2/beers/random");

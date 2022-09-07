@@ -1,0 +1,136 @@
+html,
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Rubik", sans-serif;
+  background: black;
+  color: antiquewhite;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: grey;
+  color: antiquewhite;
+  padding: 10px;
+  h1 {
+    margin-right: auto;
+    padding-left: 10px;
+  }
+  input {
+    margin-right: auto;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 10px;
+    padding: 5px 20px;
+    width: 200px;
+  }
+}
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.randomBeer {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.randomBeerContainer {
+  width: 300px;
+  height: 300px;
+
+  border-radius: 2rem;
+  background: rgba(255, 235, 205, 0.1);
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  p {
+    font-size: 12px;
+  }
+}
+.favBeers {
+  grid-column: 1/2;
+  grid-row: 2/3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.allBeers {
+  grid-column: 2/4;
+  grid-row: 1/3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.beerContainer {
+  width: 300px;
+  height: 300px;
+
+  border-radius: 2rem;
+  background: rgba(255, 235, 205, 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  p {
+    font-size: 12px;
+  }
+  button {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: none;
+    // rotate: 30deg;
+    border: 2px solid red;
+    border-right: none;
+    padding: 5px 10px;
+    color: white;
+  }
+  &:hover {
+    scale: 1.02;
+    transition: ease-out 0.2s;
+  }
+}
+
+.beersContainer {
+  height: 90vh;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.favContainer {
+  display: flex;
+}
+img {
+  max-height: 150px;
+}
+h1 {
+  text-align: center;
+}
+p {
+  overflow: scroll;
+}
+h2 {
+  margin: 20px 0px;
+}
+.hide {
+  display: none;
+}
