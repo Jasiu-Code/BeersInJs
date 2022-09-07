@@ -1,76 +1,88 @@
-// if (document.readyState == "loading") {
-//   document.addEventListener("DOMContentLoaded", ready);
-// } else {
-//   ready();
-// }
-
-async function getAllBeers() {
-  const response = await fetch("https://api.punkapi.com/v2/beers");
-  const data = await response.json();
-  displayAllBeers(data);
+if (document.readyState == "loading") {
+  document.addEventListener("DOMContentLoaded", ready);
+} else {
+  ready();
 }
-getAllBeers();
-async function getRandomBeers() {
-  const response = await fetch("https://api.punkapi.com/v2/beers/random");
-  const data = await response.json();
-  displayRandomBeers(data);
-}
-getRandomBeers();
-
-function displayRandomBeers(data) {
+function ready() {
   const randomBeer = document.getElementById("randomBeer");
-  data.map((beer) => {
-    console.log(beer.name);
-    randomBeer.innerHTML = `
+  const beersContainer = document.getElementById("beersContainer");
+  const favBeers = document.getElementById("favBeer");
+  const fav = favBeers.getElementsByClassName("fav");
+
+  function displayRandomBeer(data) {
+    data
+      .map((beer) => {
+        randomBeer.innerHTML += `
         <div class='beerContainer'>
             <h3 class='name'>${beer.name}</h3>
             <img src='${beer.image_url}'></img>
             <p>${beer.description}</p>
         </div>
         `;
-  });
-}
+      })
+      .join("");
+  }
 
-function displayAllBeers(data) {
-  const beersContainer = document.getElementById("beersContainer");
-  data.map((beer) => {
-    console.log(beer.name);
-    beersContainer.innerHTML += `
-      <div class='beerContainer'>
-          <h3 class='name'>${beer.name}</h3>
-          <img src='${beer.image_url}'></img>
-          <p>${beer.description}</p>
-          <button onclick="addToFav('${beer.name}')">Add to Favourite</button>
-      </div>
-      `;
+  function displayAllBeers(data) {
+    data
+      .map((beer) => {
+        beersContainer.innerHTML += `
+        <div class='beerContainer'>
+            <h3 class='name'>${beer.name}</h3>
+            <img src='${beer.image_url}'></img>
+            <p>${beer.description}</p>
+            <button class="add">Add to Favourite</button>
+            </div>
+            `;
+      })
+      .join("");
+  }
+  beersContainer.addEventListener("click", function (e) {
+    const tgt = e.target.closest(".add");
+    if (tgt)
+      addToFav(
+        tgt.closest(".beerContainer").querySelector(".name").textContent
+      );
   });
-}
+  favBeers.addEventListener("click", function (e) {
+    const tgt = e.target.closest(".removeBtn");
+    if (tgt)
+      removeFav(tgt.closest(".favContainer").querySelector(".fav").textContent);
+  });
 
-function addToFav(name) {
-  const favBeers = document.getElementById("favBeer");
-  const fav = favBeers.getElementsByClassName("fav");
-  console.log(fav.length);
-  for (let i = 0; i < fav.length; i++) {
-    if (fav[i].innerText == name) {
-      alert("Its already your favourite!");
-      return;
+  function addToFav(name) {
+    for (let i = 0; i < fav.length; i++) {
+      if (fav[i].innerText == name) {
+        alert("Its already your favourite!");
+        return;
+      }
+    }
+    favBeers.innerHTML += `
+    <div class="favContainer">
+        <li class="fav">${name}</li>
+        <button class="removeBtn">Remove</button>
+    </div>
+        `;
+  }
+
+  function removeFav(name) {
+    const fav = document.getElementsByClassName("fav");
+    for (let i = 0; i < fav.length; i++) {
+      if (fav[i].innerText == name) {
+        fav[i].parentElement.remove();
+      }
     }
   }
-  favBeers.innerHTML += `
-  <div>
-    <li class="fav">${name}</li>
-    <button onclick="removeFav('${name}')">Remove</button>
-  </div>
-    `;
-}
-
-function removeFav(name) {
-  const fav = document.getElementsByClassName("fav");
-  for (let i = 0; i < fav.length; i++) {
-    if (fav[i].innerText == name) {
-      fav[i].parentElement.remove();
-    }
+  async function getAllBeers() {
+    const response = await fetch("https://api.punkapi.com/v2/beers");
+    const data = await response.json();
+    displayAllBeers(data);
   }
-  //   var buttonClicked = e.target;
-  //   buttonClicked.parentElement.remove();
+  async function getRandomBeer() {
+    const response = await fetch("https://api.punkapi.com/v2/beers/random");
+    const data = await response.json();
+    displayRandomBeer(data);
+  }
+  getAllBeers();
+  getRandomBeer();
 }
