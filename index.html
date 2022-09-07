@@ -12,33 +12,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="main.css" />
-    <style>
-      .layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-      }
-      .randomBeer {
-        grid-column: 1/2;
-        grid-row: 1/2;
-        background: red;
-      }
-      .favBeers {
-        grid-column: 1/2;
-        grid-row: 2/3;
-        background: blue;
-      }
-      .allBeers {
-        grid-column: 2/4;
-        grid-row: 1/3;
-        background-color: bisque;
-        /* display: flex; */
-      }
-      .beers {
-        height: 90vh;
-        overflow: scroll;
-      }
-    </style>
+    <style></style>
   </head>
   <body>
     <div class="header">
@@ -47,21 +21,17 @@
     </div>
     <main>
       <div class="layout">
-        <div class="randomBeer">
+        <div class="randomBeer" id="randomBeer">
           <h2>Did you try this?:</h2>
         </div>
         <div class="favBeers" id="favBeers">
           <h2>Your favourite beers:</h2>
-          <ul>
-            <li>Beer 1</li>
-            <li>Beer 1</li>
-            <li>Beer 1</li>
-          </ul>
+          <ul class="favBeer" id="favBeer"></ul>
         </div>
 
         <div class="allBeers">
           <h2>List of all beers:</h2>
-          <div class="beers" id="beers"></div>
+          <div class="beersContainer" id="beersContainer"></div>
         </div>
       </div>
     </main>

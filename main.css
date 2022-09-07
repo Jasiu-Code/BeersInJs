@@ -32,7 +32,39 @@ body {
   padding: 5px 20px;
   width: 200px;
 }
-
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.randomBeer {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  background: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.favBeers {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  background: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.allBeers {
+  grid-column: 2/4;
+  grid-row: 1/3;
+  background-color: bisque;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.beersContainer {
+  height: 90vh;
+  overflow: scroll;
+}
 .beerContainer {
   width: 300px;
   height: 300px;
@@ -50,7 +82,7 @@ body {
   scale: 1.05;
   transition: ease-out 0.2s;
 }
-.beers {
+.beersContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -59,6 +91,12 @@ body {
 }
 .beerContainer p {
   font-size: 12px;
+}
+.beerContainer button {
+  border: 2px solid red;
+  background-color: blue;
+  padding: 5px 10px;
+  color: white;
 }
 img {
   max-height: 150px;
