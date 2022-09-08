@@ -18,13 +18,15 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: grey;
+  background: black;
   color: antiquewhite;
   padding: 10px;
 }
@@ -36,48 +38,59 @@ body {
 
 .header input {
   margin-right: auto;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
   border: none;
   border-radius: 10px;
   padding: 5px 20px;
-  width: 200px;
+  width: 300px;
 }
 
 .layout {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
-  -ms-grid-rows: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+  display: block;
+}
+
+@media (min-width: 600px) {
+  .layout {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+  }
 }
 
 .randomBeer {
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 1;
-  grid-column: 1/2;
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 1;
-  grid-row: 1/2;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  display: none;
+  margin-left: 20px;
+}
+
+@media (min-width: 600px) {
+  .randomBeer {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1/2;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    grid-row: 1/2;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
 }
 
 .randomBeerContainer {
-  width: 300px;
+  width: 250px;
   height: 300px;
   border-radius: 2rem;
   background: rgba(255, 235, 205, 0.1);
-  padding: 10px 30px;
+  padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,6 +117,7 @@ body {
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2/3;
+  margin-left: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -179,6 +193,7 @@ body {
 }
 
 .beersContainer {
+  margin-right: 10px;
   height: 90vh;
   overflow: scroll;
   display: -webkit-box;
@@ -199,6 +214,34 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.favContainer ul {
+  width: 100%;
+}
+
+.favContainer li {
+  padding: 5px;
+  white-space: nowrap;
+  overflow: scroll;
+  max-width: 200px;
+}
+
+.favContainer button {
+  padding: 3px;
+  border: 2px solid red;
+  color: red;
+  background: none;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 img {

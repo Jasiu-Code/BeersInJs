@@ -72,7 +72,7 @@ function ready() {
     favBeers.innerHTML += `
     <div class="favContainer">
         <li class="fav">${name}</li>
-        <button class="removeBtn">Remove</button>
+        <button class="removeBtn">Delete</button>
     </div>
         `;
   }

@@ -13,9 +13,10 @@ body {
 }
 .header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background: grey;
+  background: black;
   color: antiquewhite;
   padding: 10px;
   h1 {
@@ -24,32 +25,40 @@ body {
   }
   input {
     margin-right: auto;
-    transform: translateX(-50%);
+    // transform: translateX(-50%);
     border: none;
     border-radius: 10px;
     padding: 5px 20px;
-    width: 200px;
+    width: 300px;
   }
 }
 .layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: block;
+
+  @media (min-width: 600px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
 }
 .randomBeer {
-  grid-column: 1/2;
-  grid-row: 1/2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: none;
+  margin-left: 20px;
+  @media (min-width: 600px) {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .randomBeerContainer {
-  width: 300px;
+  width: 250px;
   height: 300px;
 
   border-radius: 2rem;
   background: rgba(255, 235, 205, 0.1);
-  padding: 10px 30px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,7 +70,7 @@ body {
 .favBeers {
   grid-column: 1/2;
   grid-row: 2/3;
-
+  margin-left: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +87,6 @@ body {
 .beerContainer {
   width: 300px;
   height: 300px;
-
   border-radius: 2rem;
   background: rgba(255, 235, 205, 0.1);
   padding: 15px;
@@ -108,6 +116,7 @@ body {
 }
 
 .beersContainer {
+  margin-right: 10px;
   height: 90vh;
   overflow: scroll;
   display: flex;
@@ -118,6 +127,27 @@ body {
 }
 .favContainer {
   display: flex;
+  width: 100%;
+  flex: 1;
+  justify-content: space-between;
+  ul {
+    width: 100%;
+  }
+  li {
+    padding: 5px;
+    white-space: nowrap;
+    overflow: scroll;
+    max-width: 200px;
+  }
+  button {
+    padding: 3px;
+    border: 2px solid red;
+    color: red;
+    background: none;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
 }
 img {
   max-height: 150px;
