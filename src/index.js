@@ -1,17 +1,18 @@
-if (document.readyState == "loading") {
-  document.addEventListener("DOMContentLoaded", ready);
+import './styles/main.scss';
+if (document.readyState == 'loading') {
+  document.addEventListener('DOMContentLoaded', ready);
 } else {
   ready();
 }
 function ready() {
-  const randomBeer = document.getElementById("randomBeer");
-  const beersContainer = document.getElementById("beersContainer");
-  const favBeers = document.getElementById("favBeer");
-  const fav = favBeers.getElementsByClassName("fav");
-  const searchInput = document.querySelector("[data-search]");
+  const randomBeer = document.getElementById('randomBeer');
+  const beersContainer = document.getElementById('beersContainer');
+  const favBeers = document.getElementById('favBeer');
+  const fav = favBeers.getElementsByClassName('fav');
+  const searchInput = document.querySelector('[data-search]');
   let beersArray = [];
 
-  searchInput.addEventListener("input", (e) => {
+  searchInput.addEventListener('input', (e) => {
     const value = e.target.value.toLowerCase();
     const filteredBeers = beersArray.filter((beer) => {
       return beer.name.toLowerCase().includes(value);
@@ -31,7 +32,7 @@ function ready() {
         </div>
         `;
       })
-      .join("");
+      .join('');
   }
 
   function displayAllBeers(data) {
@@ -46,26 +47,26 @@ function ready() {
             </div>
             `;
       })
-      .join("");
+      .join('');
     beersContainer.innerHTML = htmlString;
   }
-  beersContainer.addEventListener("click", function (e) {
-    const tgt = e.target.closest(".addFavBtn");
+  beersContainer.addEventListener('click', function (e) {
+    const tgt = e.target.closest('.addFavBtn');
     if (tgt)
       addToFav(
-        tgt.closest(".beerContainer").querySelector(".name").textContent
+        tgt.closest('.beerContainer').querySelector('.name').textContent
       );
   });
-  favBeers.addEventListener("click", function (e) {
-    const tgt = e.target.closest(".removeBtn");
+  favBeers.addEventListener('click', function (e) {
+    const tgt = e.target.closest('.removeBtn');
     if (tgt)
-      removeFav(tgt.closest(".favContainer").querySelector(".fav").textContent);
+      removeFav(tgt.closest('.favContainer').querySelector('.fav').textContent);
   });
 
   function addToFav(name) {
     for (let i = 0; i < fav.length; i++) {
       if (fav[i].innerText == name) {
-        alert("Its already your favourite!");
+        alert('Its already your favourite!');
         return;
       }
     }
@@ -78,7 +79,7 @@ function ready() {
   }
 
   function removeFav(name) {
-    const fav = document.getElementsByClassName("fav");
+    const fav = document.getElementsByClassName('fav');
     for (let i = 0; i < fav.length; i++) {
       if (fav[i].innerText == name) {
         fav[i].parentElement.remove();
@@ -87,13 +88,13 @@ function ready() {
   }
   async function getAllBeers() {
     const response = await fetch(
-      "https://api.punkapi.com/v2/beers?page=2&per_page=80"
+      'https://api.punkapi.com/v2/beers?page=2&per_page=80'
     );
     beersArray = await response.json();
     displayAllBeers(beersArray);
   }
   async function getRandomBeer() {
-    const response = await fetch("https://api.punkapi.com/v2/beers/random");
+    const response = await fetch('https://api.punkapi.com/v2/beers/random');
     const data = await response.json();
     displayRandomBeer(data);
   }
