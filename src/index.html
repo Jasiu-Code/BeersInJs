@@ -15,31 +15,31 @@
     <style></style>
   </head>
   <body>
-    <div class="header">
+    <header>
       <h1>BeersInJS</h1>
       <input
         type="text"
         placeholder="Find your favourite beer..."
         data-search
       />
-    </div>
+    </header>
     <main>
-      <div class="layout">
-        <div class="randomBeer" id="randomBeer">
-          <h2>Did you try this?:</h2>
-        </div>
-        <div class="favBeers" id="favBeers">
-          <h2>Your favourite beers:</h2>
-          <ul class="favBeer" id="favBeer"></ul>
-        </div>
+      <aside class="favBeersContainer" id="favBeersContainer">
+        <h2>Your favourite beers:</h2>
+        <ul class="favBeer" id="favBeer"></ul>
+      </aside>
+      <aside class="randomBeerContainer" id="randomBeerContainer">
+        <h2>Did you try this?:</h2>
+      </aside>
 
-        <div class="allBeers">
-          <h2>List of all beers:</h2>
-          <div class="beersContainer" id="beersContainer"></div>
-        </div>
-      </div>
+      <section class="allBeersContainer">
+        <h2>List of all beers:</h2>
+        <div class="beersContainer" id="beersContainer"></div>
+      </section>
     </main>
-
+    <footer>
+      <p>This webpage was created using JS SCSS HTML</p>
+    </footer>
     <script src="index.js"></script>
   </body>
 </html>

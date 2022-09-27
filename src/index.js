@@ -1,11 +1,12 @@
 import './styles/main.scss';
+import { getAllBeers, getRandomBeer } from './utils/getData.js';
 if (document.readyState == 'loading') {
   document.addEventListener('DOMContentLoaded', ready);
 } else {
   ready();
 }
 function ready() {
-  const randomBeer = document.getElementById('randomBeer');
+  const randomBeerContainer = document.getElementById('randomBeerContainer');
   const beersContainer = document.getElementById('beersContainer');
   const favBeers = document.getElementById('favBeer');
   const fav = favBeers.getElementsByClassName('fav');
@@ -14,42 +15,13 @@ function ready() {
 
   searchInput.addEventListener('input', (e) => {
     const value = e.target.value.toLowerCase();
+    console;
     const filteredBeers = beersArray.filter((beer) => {
       return beer.name.toLowerCase().includes(value);
     });
-    console.log(filteredBeers);
     displayAllBeers(filteredBeers);
   });
 
-  function displayRandomBeer(data) {
-    data
-      .map((beer) => {
-        randomBeer.innerHTML += `
-        <div class='randomBeerContainer'>
-            <h3 class='name'>${beer.name}</h3>
-            <img src='${beer.image_url}'></img>
-            <p>${beer.description}</p>
-        </div>
-        `;
-      })
-      .join('');
-  }
-
-  function displayAllBeers(data) {
-    const htmlString = data
-      .map((beer) => {
-        return `
-        <div class='beerContainer'>
-            <h3 class='name'>${beer.name}</h3>
-            <img src='${beer.image_url}'></img>
-            <p>${beer.description}</p>
-            <button class="addFavBtn">Favourite</button>
-            </div>
-            `;
-      })
-      .join('');
-    beersContainer.innerHTML = htmlString;
-  }
   beersContainer.addEventListener('click', function (e) {
     const tgt = e.target.closest('.addFavBtn');
     if (tgt)
@@ -71,10 +43,10 @@ function ready() {
       }
     }
     favBeers.innerHTML += `
-    <div class="favContainer">
-        <li class="fav">${name}</li>
+    <li class="favContainer">
+        <p class="fav">${name}</p>
         <button class="removeBtn">Delete</button>
-    </div>
+    </li>
         `;
   }
 
@@ -86,18 +58,36 @@ function ready() {
       }
     }
   }
-  async function getAllBeers() {
-    const response = await fetch(
-      'https://api.punkapi.com/v2/beers?page=2&per_page=80'
-    );
-    beersArray = await response.json();
+
+  function displayRandomBeer(data) {
+    data.map((beer) => {
+      randomBeerContainer.innerHTML += `
+        <div class='randomBeer'>
+            <h3 class='name'>${beer.name}</h3>
+            <img src='${beer.image_url}'></img>
+            <p>${beer.description}</p>
+        </div>
+        `;
+    });
+  }
+  function displayAllBeers(data) {
+    const beersToDisplay = data
+      .map((beer) => {
+        return `
+        <div class='beerContainer'>
+            <h3 class='name'>${beer.name}</h3>
+            <img src='${beer.image_url}'></img>
+            <p>${beer.description}</p>
+            <button class="addFavBtn">Favourite</button>
+        </div>
+        `;
+      })
+      .join('');
+    beersContainer.innerHTML = beersToDisplay;
+  }
+  getRandomBeer().then((res) => displayRandomBeer(res));
+  getAllBeers().then((res) => {
+    beersArray = res;
     displayAllBeers(beersArray);
-  }
-  async function getRandomBeer() {
-    const response = await fetch('https://api.punkapi.com/v2/beers/random');
-    const data = await response.json();
-    displayRandomBeer(data);
-  }
-  getAllBeers();
-  getRandomBeer();
+  });
 }
